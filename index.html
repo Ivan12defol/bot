@@ -11,6 +11,7 @@
     <h1>Привет из Mini App!</h1>
     <p id="user"></p>
     <button id="sendBtn">Отправить ID боту</button>
+    <div id="viewport"></div>
 
     <script>
       const btn = document.getElementById("sendBtn");
@@ -30,7 +31,26 @@
         "Ваш Telegram ID: " + tg.initDataUnsafe.user.id;
 
       // Размеры экрана WebApp
-      console.log("Ширина:", tg.viewport.width);
+      let div = getElementById("viewport");
+      div.innerText =
+        "Ширина: " +
+        tg.viewport.width +
+        "px\n" +
+        "Высота: " +
+        tg.viewport.height +
+        "px";
+
+      // Если хотим динамически при изменении размера
+      window.addEventListener("resize", () => {
+        div.innerText =
+          "Ширина: " +
+          tg.viewport.width +
+          "px\n" +
+          "Высота: " +
+          tg.viewport.height +
+          "px";
+      });
+      console("Ширина:", tg.viewport.width);
       console.log("Высота:", tg.viewport.height);
 
       // Можно автоматически развернуть под экран
