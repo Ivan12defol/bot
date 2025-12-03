@@ -32,24 +32,13 @@
 
       // Размеры экрана WebApp
       let div = getElementById("viewport");
-      div.innerText =
-        "Ширина: " +
-        tg.viewport.width +
-        "px\n" +
-        "Высота: " +
-        tg.viewport.height +
-        "px";
-
-      // Если хотим динамически при изменении размера
       window.addEventListener("resize", () => {
-        div.innerText =
-          "Ширина: " +
-          tg.viewport.width +
-          "px\n" +
-          "Высота: " +
-          tg.viewport.height +
-          "px";
+        div.innerHTML = `
+    <p>Ширина: ${tg.viewport.width}px</p>
+    <p>Высота: ${tg.viewport.height}px</p>
+  `;
       });
+      tg.viewport.width;
       console("Ширина:", tg.viewport.width);
       console.log("Высота:", tg.viewport.height);
 
