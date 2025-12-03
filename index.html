@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <title>Mini App</title>
@@ -8,17 +8,10 @@
   </head>
   <body>
     <h1>Привет из Mini App!</h1>
-    <h1>Привет из Mini App!</h1>
+
     <p id="user"></p>
     <button id="sendBtn">Отправить ID боту</button>
     <div id="viewport"></div>
-
-    <script>
-      const btn = document.getElementById("sendBtn");
-      btn.addEventListener("click", () => {
-        tg.sendData(tg.initDataUnsafe.user.id.toString());
-      });
-    </script>
 
     <script>
       const tg = window.Telegram.WebApp;
@@ -26,24 +19,32 @@
       // Разворачиваем окно под экран
       tg.expand();
 
-      // Получаем данные о пользователе
-      document.getElementById("user").innerText =
-        "Ваш Telegram ID: " + tg.initDataUnsafe.user.id;
+      // Отображаем данные о пользователе
+      const userEl = document.getElementById("user");
+      userEl.innerText = `Ваш Telegram ID: ${tg.initDataUnsafe.user.id}`;
 
-      // Размеры экрана WebApp
-      let div = getElementById("viewport");
-      window.addEventListener("resize", () => {
-        div.innerHTML = `
-    <p>Ширина: ${tg.viewport.width}px</p>
-    <p>Высота: ${tg.viewport.height}px</p>
-  `;
+      // Кнопка отправки ID боту
+      const btn = document.getElementById("sendBtn");
+      btn.addEventListener("click", () => {
+        tg.sendData(tg.initDataUnsafe.user.id.toString());
       });
-      tg.viewport.width;
-      console("Ширина:", tg.viewport.width);
-      console.log("Высота:", tg.viewport.height);
 
-      // Можно автоматически развернуть под экран
-      tg.expand();
+      // Функция обновления размеров viewport
+      const viewportEl = document.getElementById("viewport");
+      function updateViewport() {
+        viewportEl.innerHTML = `
+        <p>Ширина: ${tg.viewport.width}px</p>
+        <p>Высота: ${tg.viewport.height}px</p>
+      `;
+        console.log("Ширина:", tg.viewport.width);
+        console.log("Высота:", tg.viewport.height);
+      }
+
+      // Инициализация размеров
+      updateViewport();
+
+      // Обновление при изменении размера окна
+      window.addEventListener("resize", updateViewport);
     </script>
   </body>
 </html>
