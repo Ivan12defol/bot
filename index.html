@@ -28,6 +28,13 @@
       // Получаем данные о пользователе
       document.getElementById("user").innerText =
         "Ваш Telegram ID: " + tg.initDataUnsafe.user.id;
+
+      // Размеры экрана WebApp
+      console.log("Ширина:", tg.viewport.width);
+      console.log("Высота:", tg.viewport.height);
+
+      // Можно автоматически развернуть под экран
+      tg.expand();
     </script>
   </body>
 </html>
